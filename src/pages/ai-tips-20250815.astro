@@ -7,37 +7,178 @@ import Slide from "../components/Slide.astro";
 <Layout title="プレゼンテーション1">
 	<div class="reveal">
 		<div class="slides">
-			<Title />
-			<Slide>
-				<h2>前提</h2>
-				<ul>
-					<li>claude desktopユーザーです。あとmcpを少々くらい。</li>
-					<li>TypeScriptフロントエンド開発での利用が多いです。</li>
-					<li class="fragment">chatgpt, claude code, gemini cli, codex cliはちょっとだけ使いました。</li>
-				</ul>
-			</Slide>
-
-			<section data-markdown>
-				<textarea data-template>
-					## Slide 1
-					A paragraph with some text and a [link](https://hakim.se).
-					---
-					## Slide 2
-					---
-					## Slide 3
-				</textarea>
+			<!-- タイトルスライド -->
+			<section class="title-slide">
+				<h1>AIを使用した開発Tips</h1>
+				<p>Claude Desktop & MCPを活用した<br>TypeScriptフロントエンド開発</p>
 			</section>
-			<Slide>
-				<h2>前提</h2>
-				<ul>
-					<li>claude desktopユーザーです。あとmcpを少々くらい。</li>
-					<li class="fragment">CSS Preprocessors</li>
-					<li class="fragment">Static generation</li>
-					<li class="fragment">No extra JavaScript added to the bundle</li>
-					<li class="fragment">Add UI frameworks if and where needed</li>
-				</ul>
-			</Slide>
 
+			<!-- 前提 -->
+			<section>
+				<h3>前提</h3>
+				<ul>
+					<li class="fragment">Claude Desktopユーザー</li>
+					<li class="fragment">MCPを少々利用</li>
+					<li class="fragment">TypeScriptフロントエンド開発での利用が多い</li>
+					<li class="fragment">ChatGPT, Claude Code, Gemini CLI, Codex CLIも少し使用経験あり</li>
+				</ul>
+				<p class="fragment" style="margin-top: 2em; text-align: center;">
+					<strong>チャットベースの開発Tipsを共有します</strong>
+				</p>
+			</section>
+
+			<!-- 結論 -->
+			<section>
+				<h3>結論から</h3>
+				<div class="fragment" style="font-size: 1.5em; text-align: center; margin: 2em 0; padding: 1em; background-color: #ecf0f1; border-radius: 10px; color: #2c3e50;">
+					<strong>部分最適をチャットベースに<br>いかに作り出してあげるかが<br>現状の個人的最適解</strong>
+				</div>
+			</section>
+
+			<!-- 部分最適とは -->
+			<section>
+				<h3>部分最適とは</h3>
+				<p class="fragment" style="font-size: 1.2em; margin-bottom: 1em;">
+					関連するコードやコンテキストを閉じ込めた状態で質問を行う
+				</p>
+			</section>
+
+			<!-- コード例 -->
+			<section>
+				<h4>部分最適の例</h4>
+				<pre is:raw><code class="typescript" data-line-numbers="1-10|2,5|1,2,6-10">import ComponentA from '@/component/a'
+import {useB} from '@/hook/b' // ← ここにロジックが入っている場合
+
+export default ComponentC(){
+  const {data} = useB()
+  return <div>{data}</div>
+}</code></pre>
+				<div class="fragment">
+					<p><strong>ポイント：</strong></p>
+					<ul>
+						<li>ComponentA, hookB, ComponentCの全てを渡す</li>
+						<li>結合した状態で渡すとさらに良い（けどめんどくさい）</li>
+						<li>コンテキストが増大している恩恵を受けやすい</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- 仕様調査 -->
+			<section>
+				<h3><span class="neutral">▲</span> 仕様調査</h3>
+				<div class="fragment">
+					<h4>良い点</h4>
+					<ul>
+						<li>ヒントを得たり、ざっと網羅的な情報を自然言語で得られる</li>
+					</ul>
+				</div>
+				<div class="fragment">
+					<h4>注意点</h4>
+					<ul>
+						<li>大体はあってるが詳細まで深掘りすると間違っていることがある</li>
+						<li>真の仕様までは大体辿りつかない</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- ブランチ名の英語化 -->
+			<section>
+				<h3><span class="good">◯</span> ブランチ名の英語化</h3>
+				<p class="fragment" style="font-size: 1.2em;">
+					issueが日本語で書かれているので、<br>そっと投げる
+				</p>
+				<div class="fragment" style="margin-top: 2em; padding: 1em; background-color: #d5f4e6; border-radius: 8px; color: #2c3e50;">
+					<strong>使用例：</strong><br>
+					「このissueの内容を英語のブランチ名にして」
+				</div>
+			</section>
+
+			<!-- ライブラリ自体の分析 -->
+			<section>
+				<h3><span class="bad">×</span> ライブラリ自体の分析</h3>
+				<div class="fragment">
+					<h4>試したこと</h4>
+					<ul>
+						<li>OSSをクローンしてやりたいことや、なぜできないかを質問</li>
+						<li>Windsurfでリポジトリの分析を実行</li>
+					</ul>
+				</div>
+				<div class="fragment">
+					<h4>結果</h4>
+					<ul>
+						<li>関連するコードは抽出できていそう</li>
+						<li>解決策までは見つけられなかった</li>
+						<li>コンテキストの増大やリポジトリのサイズ次第ではうまくいくかも</li>
+					</ul>
+				</div>
+				<div class="fragment" style="font-size: 0.9em; color: #7f8c8d;">
+					※ orvalのルール除外設定、AWS IoT Greengrassセキュアトンネリングで試した結果
+				</div>
+			</section>
+
+			<!-- MCPの活用 -->
+			<section>
+				<h3>MCPの活用</h3>
+			</section>
+
+			<!-- JetBrains MCP -->
+			<section>
+				<h4>jetbrains-mcp</h4>
+				<div class="fragment">
+					<p><strong>機能：</strong><br>
+						JetBrains系のIDEとAIが対話可能</p>
+				</div>
+				<div class="fragment">
+					<p><strong>活用法：</strong><br>
+						ESLintなどのエディタで確認できるエラーや警告を取得</p>
+				</div>
+				<div class="fragment" style="margin-top: 1.5em; padding: 1em; background-color: #e8f4f8; border-radius: 8px; color: #2c3e50;">
+					<strong>使用例：</strong><br>
+					「今開いているファイルのエラーがなくなるまで修正して」
+				</div>
+			</section>
+
+			<!-- Sequential Thinking -->
+			<section>
+				<h4>sequential-thinking</h4>
+				<p class="fragment" style="font-size: 1.2em;">
+					thinkingをMCPでやってくれるらしい
+				</p>
+				<div class="fragment" style="margin-top: 2em; font-size: 0.9em; color: #7f8c8d;">
+					※ 思考プロセスの可視化と改善に期待
+				</div>
+			</section>
+
+			<!-- Context7 -->
+			<section>
+				<h4>context7</h4>
+				<div class="fragment">
+					<p><strong>機能：</strong><br>
+						ライブラリのドキュメントを取得</p>
+				</div>
+				<div class="fragment">
+					<p><strong>制限：</strong><br>
+						扱うトークン量が限られているので<br>回答精度はそこまで高くない</p>
+				</div>
+			</section>
+
+			<!-- まとめ -->
+			<section class="title-slide">
+				<h3>まとめ</h3>
+				<div class="fragment">
+					<p style="font-size: 1.3em; margin: 1em 0;">
+						<strong>部分最適</strong>を意識した<br>コンテキスト設計が重要
+					</p>
+				</div>
+				<div class="fragment">
+					<p>MCPの活用でより効率的な開発が可能</p>
+				</div>
+				<div class="fragment" style="margin-top: 2em;">
+					<p style="font-size: 1.1em; color: #3498db;">
+						Thank you!
+					</p>
+				</div>
+			</section>
 		</div>
 	</div>
 </Layout>
