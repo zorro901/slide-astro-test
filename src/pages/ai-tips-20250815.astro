@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Title from "../slides/Title.astro";
+import Slide from "../components/Slide.astro";
+---
+
+<Layout title="プレゼンテーション1">
+	<div class="reveal">
+		<div class="slides">
+			<Title />
+			<Slide>
+				<h2>前提</h2>
+				<ul>
+					<li>claude desktopユーザーです。あとmcpを少々くらい。</li>
+					<li>TypeScriptフロントエンド開発での利用が多いです。</li>
+					<li class="fragment">chatgpt, claude code, gemini cli, codex cliはちょっとだけ使いました。</li>
+				</ul>
+			</Slide>
+
+			<section data-markdown>
+				<textarea data-template>
+					## Slide 1
+					A paragraph with some text and a [link](https://hakim.se).
+					---
+					## Slide 2
+					---
+					## Slide 3
+				</textarea>
+			</section>
+			<Slide>
+				<h2>前提</h2>
+				<ul>
+					<li>claude desktopユーザーです。あとmcpを少々くらい。</li>
+					<li class="fragment">CSS Preprocessors</li>
+					<li class="fragment">Static generation</li>
+					<li class="fragment">No extra JavaScript added to the bundle</li>
+					<li class="fragment">Add UI frameworks if and where needed</li>
+				</ul>
+			</Slide>
+
+		</div>
+	</div>
+</Layout>

@@ -1,15 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Title from "../slides/Title.astro";
-import WhyAstro from "../slides/WhyAstro.astro";
 ---
 
-<Layout title="My Awesome Talk Title">
-	<main class="reveal">
-		<div class="slides">
-			<Title />
-			<WhyAstro />
-			<!-- Put your slides here -->
-		</div>
-	</main>
+<Layout title="プレゼンテーション一覧">
+	<div style="padding: 2rem; text-align: center;">
+		<h1>プレゼンテーション一覧</h1>
+		<ul style="list-style: none; max-width: 600px; margin: 0 auto;">
+			<li><a href="/slides/ai-tips-20250815">ai-tips-20250815</a></li>
+			<li><a href="/tech-talk">技術勉強会</a></li>
+			<li><a href="/company-intro">会社紹介</a></li>
+			<li><a href="/product-demo">製品デモ</a></li>
+		</ul>
+	</div>
 </Layout>
